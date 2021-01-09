@@ -10,10 +10,13 @@ public class CameraControl : MonoBehaviour
 
     private void Track()
     {
-
+        Vector3 posA = target.position;
+        Vector3 posB = transform.position;
+        posB = Vector3.Lerp(posB, posA, 0.5f * Time.deltaTime * speed);
+        transform.position = posB;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         Track();
     }

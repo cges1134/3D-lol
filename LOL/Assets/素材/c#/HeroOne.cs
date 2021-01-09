@@ -5,8 +5,8 @@ public class HeroOne : MonoBehaviour
     [Header("角色資料")]
     public Herocontrol Date;
     protected Animator ani;
-    private float[] skillTimer = new float[4];
-    private bool[] skillStart = new bool[4];
+    protected float[] skillTimer = new float[4];
+    protected bool[] skillStart = new bool[4];
     private Rigidbody rig;
     protected virtual void Awake()
     {
@@ -16,7 +16,7 @@ public class HeroOne : MonoBehaviour
     protected virtual void Update()
     {
         TimetControl();
-       
+
     }
     private void TimetControl()
     {
@@ -40,8 +40,12 @@ public class HeroOne : MonoBehaviour
     /// <param name="targrt">要前往的目標位置</param>
     public void Move(Transform targrt)
     {
+        Vector3 pos = rig.position;
         //剛體.移動座標(座標)
         rig.MovePosition(targrt.position);
+        transform.LookAt(targrt);
+        ani.SetBool("跑步開關", rig.position != pos);
+
     }
 
     public void skill1()

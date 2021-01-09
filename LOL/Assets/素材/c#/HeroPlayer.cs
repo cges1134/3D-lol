@@ -8,6 +8,7 @@ public class HeroPlayer : HeroOne
     private Button btnskill3;
     private Button btnskill4;
 
+    private Image[] imgSkillsCD = new Image[4];
     private Image[] imgSkills = new Image[4];
     private Text[] textSkills = new Text[4];
     /// <summary>
@@ -34,7 +35,7 @@ public class HeroPlayer : HeroOne
     {
         base.Update();
         MoveControl();
-        Move(target);
+        UpdateSkillCD();
     }
 
     private void MoveControl ()
@@ -62,9 +63,27 @@ public class HeroPlayer : HeroOne
         for (int i = 0; i < 4; i++)
         {
             imgSkills[i] = GameObject.Find("技能圖片" + (i + 1)).GetComponent<Image>();
+            imgSkillsCD[i] = GameObject.Find("技能冷卻圖片" + (i + 1)).GetComponent<Image>();
             textSkills[i] = GameObject.Find("技能數字" + (i + 1)).GetComponent<Text>();
             imgSkills[i].sprite = Date.skills[i].image;
             textSkills[i].text = "";
+        }
+    }
+    private void UpdateSkillCD()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (skillStart[i])
+            {
+                textSkills[i].text = (Date.skills[i].cd - skillTimer[i]).ToString("F0");
+                imgSkillsCD[i].fillAmount = (Date.skills[i].cd - skillTimer[i]) / Date.skills[i].cd;
+            }
+            else
+            {
+                imgSkillsCD[i].fillAmount = 0;
+                textSkills[i].text = "";
+
+            }
         }
     }
 }
