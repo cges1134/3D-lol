@@ -7,14 +7,16 @@ public class HeroOne : MonoBehaviour
     protected Animator ani;
     private float[] skillTimer = new float[4];
     private bool[] skillStart = new bool[4];
-
+    private Rigidbody rig;
     protected virtual void Awake()
     {
         ani = GetComponent<Animator>();
+        rig = GetComponent<Rigidbody>();
     }
-    private void Update()
+    protected virtual void Update()
     {
         TimetControl();
+       
     }
     private void TimetControl()
     {
@@ -32,9 +34,14 @@ public class HeroOne : MonoBehaviour
             }
         }
     }
-    public void Move()
+    /// <summary>
+    /// 移動
+    /// </summary>
+    /// <param name="targrt">要前往的目標位置</param>
+    public void Move(Transform targrt)
     {
-
+        //剛體.移動座標(座標)
+        rig.MovePosition(targrt.position);
     }
 
     public void skill1()
