@@ -11,10 +11,10 @@ public class Herocontrol : ScriptableObject
     [Header("攻擊力"), Range(10, 100)]
     public float attack;
 
-    [Header("移動速度"), Range(100, 500)]
+    [Header("移動速度"), Range(10, 500)]
     public float speed;
 
-    [Header("攻擊速度"), Range(100, 500)]
+    [Header("攻擊速度"), Range(10, 500)]
     public float attackspeed;
 
     // 類型後加上 []：陣列 - 儲存多筆相同類型的資料
