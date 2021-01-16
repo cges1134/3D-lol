@@ -30,9 +30,13 @@ public class Tower : MonoBehaviour
     {
         Collider[] hit = Physics.OverlapSphere(transform.position, rangeAtk, 1 << layer);
 
-        for (int i = 0; i < hit.Length; i++)
+        if (hit.Length > 0)
         {
-            print(hit[i].name);
+       GameObject temp = Instantiate(psBullet, transform.position + Vector3.up * 10, Quaternion.identity);
+            Bullet bullet = temp.AddComponent<Bullet>();
+            bullet.target = hit[0].transform;
+            bullet.speed = speedBullet;
+
         }
 
     }
