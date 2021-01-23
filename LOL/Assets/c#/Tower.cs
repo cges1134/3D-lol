@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
@@ -50,7 +49,7 @@ public class Tower : MonoBehaviour
             else
             {
                 timer = 0;
-                GameObject temp = Instantiate(psBullet, transform.position + Vector3.up * 10, Quaternion.identity);
+                GameObject temp = Instantiate(psBullet, transform.position + Vector3.up * 5, Quaternion.identity);
                 Bullet bullet = temp.AddComponent<Bullet>();
                 bullet.target = hit[0].transform;
                 bullet.speed = speedBullet;

@@ -16,6 +16,10 @@ public class Solder : HeroOne
     [Header("對方的圖層")]
     public int layerEnemy;
 
+    private Transform castle;
+    /// <summary>
+    ///敵方主堡目標
+    /// </summary>
     private Transform target;
 
     private void OnDrawGizmosSelected()
@@ -31,7 +35,8 @@ public class Solder : HeroOne
         agent = GetComponent<NavMeshAgent>();
         agent.speed = date.speed;
         agent.stoppingDistance = stopDistance;
-        //target = GameObject.Find(targetName).transform;
+        castle = GameObject.Find(targetName).transform;
+        target = castle;
     }
     protected override void Update()
     {
@@ -39,16 +44,13 @@ public class Solder : HeroOne
         Move(target);
     }
 
-    protected override void Move(Transform targrt)
+    protected override void Move(Transform target)
     {
         Collider[] hit = Physics.OverlapSphere(transform.position, rangeAttack, 1 << layerEnemy);
-        if (hit.Length >0)
-        {
-            print(hit[0]);
-        }
-        canvasHP.eulerAngles = new Vector3(-60, 180, 0);
-        agent.SetDestination(targrt.position);
-        ani.SetBool("跑步開關", agent.remainingDistance > agent.stoppingDistance);
+        //agent.SetDestination(target.position);//設定目的地(目標物件)
+        ani.SetBool("跑步開關", agent.remainingDistance > agent.stoppingDistance);//當 剩餘距離 > 停止距離 時 跑步
+        if (hit.Length > 0) this.target = hit[0].transform;//如果 範圍內有敵方 設定為目標
+            canvasHP.eulerAngles = new Vector3(-60, 180, 0);//角度不變
     }
 
 

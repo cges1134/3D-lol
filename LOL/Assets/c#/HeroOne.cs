@@ -9,8 +9,11 @@ public class HeroOne : MonoBehaviour
     public Transform restart;
     [Header("圖層")]
     public int layer;
+    [Header("剛體")]
     private Rigidbody rig;
+    [Header("血條文字")]
     private Text texthp;
+    [Header("血條")]
     private Image imghp;
     protected Transform canvasHP;
     private float hp;
@@ -92,12 +95,12 @@ public class HeroOne : MonoBehaviour
     /// 移動
     /// </summary>
     /// <param name="targrt">要前往的目標位置</param>
-protected virtual void Move(Transform targrt)
+protected virtual void Move(Transform target)
     {
         Vector3 pos = rig.position;
         //剛體.移動座標(座標)
-        rig.MovePosition(targrt.position);
-        transform.LookAt(targrt);
+        rig.MovePosition(target.position);
+        transform.LookAt(target);
         ani.SetBool("跑步開關", rig.position != pos);
        // canvasHP.eulerAngles = new Vector3(-60, 180, 0);
     }
