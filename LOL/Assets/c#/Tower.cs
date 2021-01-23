@@ -61,4 +61,11 @@ public class Tower : MonoBehaviour
 
     }
 
+    protected virtual void Dead()
+    {
+        //hp = 0;
+        //texthp.text = 0.ToString();
+        //Dead = true;
+        gameObject.layer = 0;
+    }
 }
